@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <title>Katė ar Šuo</title>
+    <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+    <div class="container"><br>
+        <center>
+            <h2>CNN bando atspėti ar tai yra katė, ar šuo</h2>
+        </center>
+    </div>
+
+    <div class=container"><br>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-4">
+                <form action="" method="post" role="form">
+                    {{ form.csrf }}
+                    <div class="form-group">
+
+                        <label for="url">Nuotraukos url:</label>
+                        <input type="text" class="form-control" id="url" name="url" placeholder="Nuotraukos url">
+                        <br>
+
+                    </div>
+                    <br>
+
+                    <center>
+                        <button type="submit" class="btn btn-success">Kas tai?</button>
+                    </center>
+                </form>
+
+                <br>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+
+                {% for message in messages %}
+                {% if "Neįvedėte URL!" not in message[1]: %}
+                <div class="alert alert-info">
+                    <strong>Čia yra </strong> {{ message[1] }}
+                </div>
+                {% endif %}
+
+                {% if "Neįvedėte URL!" in message[1]: %}
+                <div class="alert alert-danger">
+                    <strong>Klaida: </strong> {{ message[1] }}
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+            </div>
+            <br>
+        </div>
+    </div>
+</body>
+
+</html>
